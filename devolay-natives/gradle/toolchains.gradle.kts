@@ -86,7 +86,10 @@ open class ToolchainConfiguration : RuleSource() {
 
         val androidNdk = locateAndroidNdk()
         if (androidNdk != null) {
-            val extraIncludes = androidNdk.parent.parent.parent.parent.parent.resolve("sysroot").resolve("usr").resolve("include")
+            //val extraIncludes = androidNdk.parent.parent.parent.parent.parent.resolve("sysroot").resolve("usr").resolve("include")
+            val extraIncludes = androidNdk.parent.parent.resolve("linux-x86_64").resolve("sysroot").resolve("usr").resolve("include")
+
+            System.out.println("NDK Path" + extraIncludes.toAbsolutePath().toString())
 
             register<Clang>("androidNdk") {
                 target("android_armv7a") { this as org.gradle.nativeplatform.toolchain.internal.gcc.DefaultGccPlatformToolChain
@@ -113,9 +116,11 @@ open class ToolchainConfiguration : RuleSource() {
                     linker.executable = "clang++"
                     linker.withArguments (configureArguments)
 
-                    symbolExtractor.executable = "arm-linux-androideabi-objcopy"
+                    //symbolExtractor.executable = "arm-linux-androideabi-objcopy"
+                    symbolExtractor.executable = "llvm-objcopy"
                     staticLibArchiver.executable = "arm-linux-androideabi-ar"
-                    stripper.executable = "arm-linux-androideabi-strip"
+                    //stripper.executable = "arm-linux-androideabi-strip"
+                    stripper.executable = "llvm-strip"
                 }
 
                 target("android_arm64-v8a") {
@@ -144,9 +149,11 @@ open class ToolchainConfiguration : RuleSource() {
                     linker.executable = "clang++"
                     linker.withArguments (configureArguments)
 
-                    symbolExtractor.executable = "aarch64-linux-android-objcopy"
+                    //symbolExtractor.executable = "aarch64-linux-android-objcopy"
+                    symbolExtractor.executable = "llvm-objcopy"
                     staticLibArchiver.executable = "aarch64-linux-android-ar"
-                    stripper.executable = "aarch64-linux-android-strip"
+                    //stripper.executable = "aarch64-linux-android-strip"
+                    stripper.executable = "llvm-strip"
                 }
 
                 target("android_x86") {
@@ -174,9 +181,11 @@ open class ToolchainConfiguration : RuleSource() {
                     linker.executable = "clang++"
                     linker.withArguments (configureArguments)
 
-                    symbolExtractor.executable = "i686-linux-android-objcopy"
+                    //symbolExtractor.executable = "i686-linux-android-objcopy"
+                    symbolExtractor.executable = "llvm-objcopy"
                     staticLibArchiver.executable = "i686-linux-android-ar"
-                    stripper.executable = "i686-linux-android-strip"
+                    //stripper.executable = "i686-linux-android-strip"
+                    stripper.executable = "llvm-strip"
                 }
 
                 target("android_x86-64") {
@@ -204,9 +213,11 @@ open class ToolchainConfiguration : RuleSource() {
                     linker.executable = "clang++"
                     linker.withArguments (configureArguments)
 
-                    symbolExtractor.executable = "x86_64-linux-android-objcopy"
+                    //symbolExtractor.executable = "x86_64-linux-android-objcopy"
+                    symbolExtractor.executable = "llvm-objcopy"
                     staticLibArchiver.executable = "x86_64-linux-android-ar"
-                    stripper.executable = "x86_64-linux-android-strip"
+                    //stripper.executable = "x86_64-linux-android-strip"
+                    stripper.executable = "llvm-strip"
                 }
             }
         }

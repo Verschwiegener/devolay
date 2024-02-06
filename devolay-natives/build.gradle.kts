@@ -291,6 +291,9 @@ val assembleAndroidArtifacts by tasks.registering(Copy::class) {
                 var androidAbi: String? = null;
 
                 if (machine.operatingSystemFamily.name == "android") {
+
+                    System.out.println("Package Android: " + machine.architecture.name)
+
                     // Identify android architecture
                     when (machine.architecture.name) {
                         "armv7a" -> {

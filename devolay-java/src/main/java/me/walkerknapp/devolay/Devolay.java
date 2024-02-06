@@ -21,7 +21,7 @@ public class Devolay {
 
         String osDirectory = getOsDirectory();
         String archDirectory = getArchDirectory();
-
+        
         if (!osDirectory.equals("android")) {
             Path devolayNativesPath = extractNative("devolay-natives", libraryExtension,
                     "/natives/" + osDirectory + "/" + archDirectory + "/" + devolayLibraryName);
@@ -40,7 +40,7 @@ public class Devolay {
         } else {
             // Devolay on Android should be loaded as an aar, so natives don't have to be extracted.
             System.loadLibrary("devolay-natives");
-            extractedNdiLibraryPath = findLibrary("ndi");
+            extractedNdiLibraryPath = findLibrary("ndi");;
         }
 
         try {
@@ -97,10 +97,12 @@ public class Devolay {
     }
 
     private static Path extractNative(String prefix, String suffix, String pathInJar) {
+        System.out.println("PathInJar: " + pathInJar);
         try(InputStream is = Devolay.class.getResourceAsStream(pathInJar)) {
             if(is == null) {
                return null;
             }
+            
 
             // Get a temporary directory to place natives
             Path tempPath = Files.createTempFile(prefix, suffix);
