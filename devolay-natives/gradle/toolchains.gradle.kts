@@ -87,9 +87,8 @@ open class ToolchainConfiguration : RuleSource() {
         val androidNdk = locateAndroidNdk()
         if (androidNdk != null) {
             //val extraIncludes = androidNdk.parent.parent.parent.parent.parent.resolve("sysroot").resolve("usr").resolve("include")
+            //linux-x86_64 does not work on every system
             val extraIncludes = androidNdk.parent.parent.resolve("linux-x86_64").resolve("sysroot").resolve("usr").resolve("include")
-
-            System.out.println("NDK Path" + extraIncludes.toAbsolutePath().toString())
 
             register<Clang>("androidNdk") {
                 target("android_armv7a") { this as org.gradle.nativeplatform.toolchain.internal.gcc.DefaultGccPlatformToolChain

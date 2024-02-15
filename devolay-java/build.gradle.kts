@@ -72,7 +72,6 @@ dependencies {
 
 tasks.jar {
     dependsOn(nativeDesktopDependency)
-    System.out.println("ZipTree: " + nativeDesktopDependency)
     from(nativeDesktopDependency.map { zipTree(it) })
 }
 
@@ -85,7 +84,6 @@ tasks.named<Jar>("integratedJar") {
 
 val androidAar by tasks.registering(Zip::class) {
     from(nativeAndroidDependency)
-    System.out.println("Package AAR: " + nativeAndroidDependency)
     from(classesJar) {
         rename { "classes.jar" }
     }
@@ -110,7 +108,6 @@ publishing {
             from(components["java"])
             artifact(sourceJar)
             artifact(javadocJar)
-            System.out.println("Android AAR: " + androidAar)
             artifact(androidAar) {
                 extension = "aar"
             }
