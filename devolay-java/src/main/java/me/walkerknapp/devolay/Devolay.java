@@ -97,7 +97,6 @@ public class Devolay {
     }
 
     private static Path extractNative(String prefix, String suffix, String pathInJar) {
-        System.out.println("PathInJar: " + pathInJar);
         try(InputStream is = Devolay.class.getResourceAsStream(pathInJar)) {
             if(is == null) {
                return null;
@@ -154,7 +153,6 @@ public class Devolay {
     public static int loadLibraries() {
         if(!librariesLoaded.get()) {
             int ret;
-            System.out.println("LoadedLibrary: " + extractedNdiLibraryPath);
             if (extractedNdiLibraryPath != null) {
                 ret = nLoadLibraries(extractedNdiLibraryPath);
             } else {
