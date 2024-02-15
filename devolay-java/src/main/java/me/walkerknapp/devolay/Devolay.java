@@ -154,6 +154,7 @@ public class Devolay {
     public static int loadLibraries() {
         if(!librariesLoaded.get()) {
             int ret;
+            System.out.println("LoadedLibrary: " + extractedNdiLibraryPath);
             if (extractedNdiLibraryPath != null) {
                 ret = nLoadLibraries(extractedNdiLibraryPath);
             } else {
