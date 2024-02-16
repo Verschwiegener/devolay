@@ -15,7 +15,7 @@ apply {
 
 // Download gulrak/filesystem to replace c++17's filesystem if not supported by the current system.
 val downloadNativeDependencies by tasks.registering(Download::class) {
-    src("https://github.com/gulrak/filesystem/releases/download/v1.3.2/filesystem.hpp")
+    src("https://github.com/gulrak/filesystem/releases/download/v1.5.14/filesystem.hpp")
     dest(temporaryDir)
 
     outputs.file(temporaryDir.resolve("filesystem.hpp"))
